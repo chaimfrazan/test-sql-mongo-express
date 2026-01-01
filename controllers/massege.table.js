@@ -16,6 +16,10 @@ export const createMessage = async (req, res) => {
     if (!user) {
       res.status(404).json({ massege: "the user not found" });
     }
+    collection.updateOne(
+      { username: user.username },
+      { $set: { encryptedMessagesCount: +1 } }
+    );
     let reversedStr = body.message.split("").reverse().join("").toUpperCase();
     const [result] = await connSql.query(
       `INSERT INTO message (username, cipher_type, encrypted_text)
