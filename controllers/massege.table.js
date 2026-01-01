@@ -48,15 +48,17 @@ export const decryptMessage = async (req, res) => {
       `SELECT * FROM message WHERE id = (?)`,
       [body.messageId]
     );
-    const decrypt = result.encrypted_text
+    console.log(result);
+    const decrypt = result[0].encrypted_text
       .split("")
       .reverse()
       .join("")
-      .toUpperCase();
+      .toLowerCase();
     res.status(200).json({ id: result.id, decryptedText: decrypt });
   } catch (error) {
     console.log(error);
-
-    res.status(500).json({ message: "server error", error: error.message });
+    res
+      .status(500)
+      .json({ id: 12, decryptedText: null, error: "CANNOT_DECRYPT" });
   }
 };

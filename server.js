@@ -13,7 +13,7 @@ app.use(async (req, res, next) => {
   req.mongoDbConn = await getMongoDbConnection();
   next();
 });
-
+app.use("/api/users", users);
 app.use("/api/message", massege);
 app.use("/api/auth/", users);
 

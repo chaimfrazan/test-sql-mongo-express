@@ -24,13 +24,22 @@ export const createUsers = async (req, res) => {
   }
 };
 
-// export const getProducts = async (req, res) => {
-//   try {
-//     const conn = req.mongoDbConn;
-//     const collection = conn.collection("products");
-//     const prodacts = await collection.find({}).toArray();
-//     res.status(200).json({ data: prodacts });
-//   } catch (error) {
-//     res.status(404).json({ massege: "products not found" });
-//   }
-// };
+export const getProfile = async (req, res) => {
+  try {
+    const conn = req.mongoDbConn;
+    const { body } = req;
+    const collection = conn.collection("users collection");
+    if (!body.username || !body.password) {
+      res.status(404).json({ massege: "error" });
+    }
+    const userFind = await collection.findOne({ username: body.username });
+    res
+      .status(200)
+      .json({
+        username: userFind.username,
+        encryptedMessagesCount: userFind.encryptedMessagesCount,
+      });
+  } catch (error) {
+    res.status(404).json({ massege: "user not found" });
+  }
+};
