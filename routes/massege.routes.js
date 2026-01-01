@@ -1,9 +1,14 @@
 import { Router } from "express";
-import { createMessage , decryptMessage } from "../controllers/massege.table.js";
+import {
+  createMessage,
+  decryptMessage,
+  listMyMessage,
+} from "../controllers/massege.table.js";
 
-const router = Router()
+const router = Router();
 
-router.post('/encript', createMessage)
-router.post('/decrypt', decryptMessage)
+router.get("/", listMyMessage);
+router.post("/encript", createMessage);
+router.post("/decrypt", decryptMessage);
 
-export default router
+export default router;

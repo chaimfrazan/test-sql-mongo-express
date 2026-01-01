@@ -5,7 +5,7 @@ export const createUsers = async (req, res) => {
     const conn = req.mongoDbConn;
     const collection = conn.collection("users collection");
     if (!body.username || !body.password) {
-      res.status(404).json({ massege: "error" });
+      res.status(404).json({ massege: "you need password and name" });
     }
     const user = await collection.insertOne({
       username: body.username,
@@ -30,7 +30,7 @@ export const getProfile = async (req, res) => {
     const { body } = req;
     const collection = conn.collection("users collection");
     if (!body.username || !body.password) {
-      res.status(404).json({ massege: "error" });
+      res.status(404).json({ massege: "you need password and name" });
     }
     const userFind = await collection.findOne({ username: body.username });
     res

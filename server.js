@@ -15,6 +15,7 @@ app.use(async (req, res, next) => {
 });
 app.use("/api/users", users);
 app.use("/api/message", massege);
+app.use("/api/messages", massege);
 app.use("/api/auth/", users);
 
 app.listen(PORT, async () => {
